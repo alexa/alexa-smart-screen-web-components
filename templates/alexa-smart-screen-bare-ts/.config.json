@@ -1,0 +1,14 @@
+{
+    "components": {
+        "packages": [
+            "apl",
+            "app-utils",
+            "common",
+            "live-view-camera",
+            "router",
+            "template-runtime",
+            "web-socket",
+            "window-manager"
+        ]
+    }
+}

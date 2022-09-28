@@ -1,0 +1,42 @@
+{
+  "name": "<%= projectName %>",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "keywords": [],
+  "main": "src/main.ts",
+  "license": "MIT",
+  "scripts": {
+    "build:dev": "webpack --mode development",
+    "build": "tsc --build && webpack --mode production",
+    "build:clean": "tsc --build --clean && yarn build",
+    "watch": "webpack --config webpack.config.js --watch"
+  },
+  "engines": {
+    "node": ">=14.17.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/jsdom-global": "^3.0.2",
+    "@types/node": "^14.17.4",
+    "@webcomponents/webcomponentsjs": "^2.6.0",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.19.1",
+    "css-loader": "^6.5.1",
+    "esm": "^3.2.25",
+    "html-webpack-plugin": "^5.5.0",
+    "jsdom": "^18.0.1",
+    "jsdom-global": "^3.0.2",
+    "style-loader": "^3.3.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.4.4",
+    "webpack": "^5.61.0",
+    "webpack-cli": "^4.9.1"
+  }
+}

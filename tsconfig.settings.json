@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "charset": "utf-8",
+    "inlineSources": false,
+    "alwaysStrict": true,
+    "noErrorTruncation": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitThis": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "removeComments": false,
+    "pretty": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es2015",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": ["DOM", "ESnext"],
+    "types": [
+      "node",
+      "mocha"
+    ],
+    "sourceMap": true,
+    "composite": true,
+    "declarationMap": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules",
+    "packages/*/node_modules",
+    "packages/*/lib",
+    "packages/*/tsclib",
+    "samples/*/node_modules",
+    "samples/*/lib",
+    "samples/*/tsclib"
+  ]
+}

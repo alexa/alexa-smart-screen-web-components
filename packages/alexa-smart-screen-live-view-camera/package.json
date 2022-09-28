@@ -1,0 +1,30 @@
+{
+  "name": "@alexa-smart-screen/live-view-camera",
+  "version": "1.0.0",
+  "description": "Component that supports RTC based camera streams and UI control for Live View Cameras.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:clean": "tsc --build --clean && tsc",
+    "clean": "tsc --build --clean",
+    "coverage": "nyc --check-coverage --lines 80 -r lcov -e .ts yarn test",
+    "lint": "eslint --fix . --ext .ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ./tsnode.js -r esm -r jsdom-global/register test/**/*.test.ts",
+    "pre-commit": "yarn lint && yarn build && yarn test"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexa/alexa-smart-screen-web-components.git",
+    "directory": "packages/alexa-smart-screen-live-view-camera"
+  },
+  "engines": {
+    "node": ">=14.17.4"
+  },
+  "devDependencies": {
+    "@alexa-smart-screen/apl": "^1.0.0",
+    "@alexa-smart-screen/common": "^1.0.0",
+    "@amzn/rtcmedia_browser_adapter": "./packages/alexa-smart-screen-live-view-camera/src/rtcMedia/rtcMediaBrowserAdapterStub"
+  }
+}

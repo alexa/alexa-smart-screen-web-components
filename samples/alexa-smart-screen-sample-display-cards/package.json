@@ -1,0 +1,31 @@
+{
+  "name": "@alexa-smart-screen/sample-display-cards",
+  "version": "1.0.0",
+  "description": "Sample APL Display Card implementations of TemplateRuntime payloads.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:clean": "tsc --build --clean && tsc",
+    "clean": "tsc --build --clean",
+    "lint": "eslint --fix . --ext .ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ./tsnode.js -r esm -r jsdom-global/register test/**/*.test.ts",
+    "pre-commit": "yarn lint && yarn build && yarn test"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexa/alexa-smart-screen-web-components.git",
+    "directory": "samples/alexa-smart-screen-sample-display-cards"
+  },
+  "engines": {
+    "node": ">=14.17.4"
+  },
+  "devDependencies": {
+    "@alexa-smart-screen/apl": "^1.0.0",
+    "@alexa-smart-screen/common": "^1.0.0",
+    "@alexa-smart-screen/router": "^1.0.0",
+    "@alexa-smart-screen/template-runtime": "^1.0.0",
+    "@alexa-smart-screen/window-manager": "^1.0.0"
+  }
+}

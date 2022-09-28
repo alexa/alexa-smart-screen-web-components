@@ -1,0 +1,39 @@
+{
+    "components": {
+        "packages": [
+            "apl",
+            "app-utils",
+            "binder-client",
+            "common",
+            "live-view-camera",
+            "router",
+            "template-runtime",
+            "web-socket",
+            "window-manager"
+        ],
+        "samples": [
+            "sample-attention-system",
+            "sample-captions",
+            "sample-display-cards"
+        ]
+    },
+    "additionalFiles": [
+        {
+            "rootDir": "",
+            "files": [
+                "tsnode.js",
+                ".npmrc"
+            ]
+        },
+        {
+            "rootDir": "samples/alexa-smart-screen-sample-app",
+            "files": [
+                "src",
+                ".babelrc",
+                "babel.config.js",
+                "README.md",
+                "webpack.config.js"
+            ]
+        }
+    ]
+}

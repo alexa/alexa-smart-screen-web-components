@@ -1,0 +1,27 @@
+{
+  "name": "@alexa-smart-screen/app-utils",
+  "version": "1.0.0",
+  "description": "Application Utilities for Alexa Smart Screen Web Components.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:clean": "yarn clean && yarn build",
+    "clean": "tsc --build --clean",
+    "lint": "eslint --fix . --ext .ts",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' nyc mocha -r ./tsnode.js -r esm test/**/*.test.ts",
+    "pre-commit": "yarn lint && yarn build && yarn test"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexa/alexa-smart-screen-web-components.git",
+    "directory": "packages/alexa-smart-screen-app-utils"
+  },
+  "engines": {
+    "node": ">=14.16.1"
+  },
+  "devDependencies": {
+    "@alexa-smart-screen/common": "^1.0.0"
+  }
+}

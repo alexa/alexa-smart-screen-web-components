@@ -1,0 +1,6 @@
+{
+    "name": "@amzn/rtcmedia_browser_adapter",
+    "version": "0.1.0",
+    "description": "placeholder stub for actual node package",
+    "main": "rtcmedia_browser_adapter_stub.js"
+  }

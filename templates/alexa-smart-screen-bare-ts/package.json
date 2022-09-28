@@ -1,0 +1,20 @@
+{
+  "name": "<%= projectName %>",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "keywords": [],
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "engines": {
+    "node": ">=14.17.4"
+  },
+  "devDependencies": {
+    "@types/node": "^14.17.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.4.4"
+  }
+}

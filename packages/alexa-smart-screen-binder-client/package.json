@@ -1,0 +1,25 @@
+{
+  "name": "@alexa-smart-screen/binder-client",
+  "version": "1.0.0",
+  "description": "Binder Client for Alexa Smart Screen Web Components",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:clean": "tsc --build --clean && tsc",
+    "lint": "eslint --fix . --ext .ts",
+    "pre-commit": "yarn lint && yarn build"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexa/alexa-smart-screen-web-components.git",
+    "directory": "packages/alexa-smart-screen-binder-client"
+  },
+  "engines": {
+    "node": ">=14.17.4"
+  },
+  "devDependencies": {
+    "@alexa-smart-screen/common": "^1.0.0"
+  }
+}

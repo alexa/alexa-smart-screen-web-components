@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "charset": "utf-8",
+    "inlineSources": false,
+    "alwaysStrict": true,
+    "noErrorTruncation": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitThis": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "removeComments": false,
+    "pretty": true,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": "src",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["DOM", "ESnext"],
+    "types": [
+      "node"
+    ],
+    "sourceMap": true,
+    "composite": true,
+    "declarationMap": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "include": ["./src/"]
+}
