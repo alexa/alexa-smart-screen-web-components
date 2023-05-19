@@ -18,6 +18,7 @@ import { IDeviceKey } from "../input/IDeviceKey";
 import { IDoNotDisturbObserver } from "../doNotDisturb/IDoNotDisturbObserver";
 import { IVisualCharacteristicsObserver } from "../visualCharacteristics/IVisualCharacteristicsObserver";
 import { IAlexaStateObserver } from "./IAlexaStateObserver";
+import { ILocaleObserver } from "../locale/ILocaleObserver";
 
 /**
  * Interface for Alexa inputs
@@ -33,7 +34,7 @@ export interface IAlexaInputs {
  * Interface for a renderer that will implement an Alexa Attention System.
  * https://developer.amazon.com/docs/alexa/alexa-voice-service/ux-design-attention.html
  */
-export interface IAttentionSystemRenderer extends IAlexaStateObserver, IDoNotDisturbObserver, IVisualCharacteristicsObserver {
+export interface IAttentionSystemRenderer extends IAlexaStateObserver, IDoNotDisturbObserver, ILocaleObserver, IVisualCharacteristicsObserver {
     getRootElement() : HTMLElement;
     setAlexaInputs(inputs : IAlexaInputs) : void;
     updateAttentionSystemState(isVisualContentActive : boolean) : void;

@@ -1,6 +1,6 @@
 {
   "name": "@alexa-smart-screen/common",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Common Library for Alexa Smart Screen Web Components.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",

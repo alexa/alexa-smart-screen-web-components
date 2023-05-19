@@ -83,7 +83,7 @@ module.exports = (env) => {
           use: ['style-loader', 'css-loader']
         },
         {
-          test: /\.(png|jpg|gif|wav)$/,
+          test: /\.(png|svg|jpg|gif|woff|woff2|eot|ttf|otf|wav)$/,
           type: 'asset/resource'
         },
         {

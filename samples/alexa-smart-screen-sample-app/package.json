@@ -1,6 +1,6 @@
 {
   "name": "@alexa-smart-screen/sample-app",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sample App for Alexa Smart Screen.",
   "main": "src/main.ts",
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -21,10 +21,10 @@
     "node": ">=14.17.4"
   },
   "devDependencies": {
-    "@alexa-smart-screen/apl": "^1.0.0",
+    "@alexa-smart-screen/apl": "^1.1.0",
     "@alexa-smart-screen/app-utils": "^1.0.0",
     "@alexa-smart-screen/binder-client": "^1.0.0",
-    "@alexa-smart-screen/common": "^1.0.0",
+    "@alexa-smart-screen/common": "^1.1.0",
     "@alexa-smart-screen/live-view-camera": "^1.0.0",
     "@alexa-smart-screen/sample-attention-system": "^1.0.0",
     "@alexa-smart-screen/sample-captions": "^1.0.0",
@@ -45,7 +45,7 @@
     "css-loader": "^6.5.1",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
-    "webpack": "^5.61.0",
+    "webpack": "^5.76.0",
     "webpack-cli": "^4.9.1"
   }
 }

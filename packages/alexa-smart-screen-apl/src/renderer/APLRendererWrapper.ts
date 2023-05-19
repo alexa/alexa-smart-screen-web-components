@@ -44,7 +44,6 @@ import {
   DisplayCssProperty,
   OverflowCssProperty} from '@alexa-smart-screen/common';
 import { IAPLRendererProps, IAPLRendererWrapperProps } from './APLRendererWrapperConfig';
-import { APLVideoFactory } from '../media/APLVideo';
 import { APLAudioPlayer, IAPLAudioPlayerProps } from '../media/APLAudioPlayer';
 import { IPC_CONFIG_APL } from '../ipcComponents/IPCNamespaceConfigAPL';
 
@@ -157,7 +156,6 @@ export class APLRendererWrapper {
       environment : this.aplEnvironment,
       audioPlayerFactory : this.createAudioPlayer.bind(this),
       client : this.client,
-      videoFactory : new APLVideoFactory(AVSVisualInterfaces.ALEXA_PRESENTATION_APL, ContentType.MIXABLE, this.focusManager, this.activityTracker, this.logger),
       supportedExtensions : this.rendererProps.supportedExtensions,
       onResizingIgnored : this.wrapperProps.onResizingIgnoredCallback
     } as any;

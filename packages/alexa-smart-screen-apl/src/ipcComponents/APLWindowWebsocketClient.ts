@@ -13,18 +13,28 @@
  * permissions and limitations under the License.
  */
 
+import { AVSVisualInterfaces, ContentType, DefaultActivityTracker, DefaultFocusManager } from '@alexa-smart-screen/common';
 import { APLClient } from 'apl-client';
+import { APLVideo } from '../media/APLVideo';
+import { IAPLWindowElementProps } from '../window/APLWindowElementProps';
 import { APLEvent } from './APLEvent';
 import { IAPLRendererInstance, IAPLRenderCompletedPayload } from './APLMessageInterfaces';
+import { IPC_CONFIG_APL } from './IPCNamespaceConfigAPL';
 
 export class APLWindowWebsocketClient extends APLClient {
   private aplEvent : APLEvent;
   private windowId : string;
 
-  constructor(aplEvent : APLEvent, windowId : string) {
-    super();
-    this.windowId = windowId;
-    this.aplEvent = aplEvent;
+  constructor(props : IAPLWindowElementProps) {
+    // Factory func for creating the APLVideo component that extends the APL MediaPlayerHandle
+    const mediaPlayerFactory = (mediaPlayer : APL.MediaPlayer) => new APLVideo(
+      mediaPlayer, AVSVisualInterfaces.ALEXA_PRESENTATION_APL, ContentType.MIXABLE, 
+      props.loggerFactory.getLogger(IPC_CONFIG_APL.namespace), 
+      props.focusManager || new DefaultFocusManager(), 
+      props.guiActivityTracker || new DefaultActivityTracker());
+    super(mediaPlayerFactory);
+    this.windowId = props.windowId;
+    this.aplEvent = props.aplEvent;
   }
 
   /**

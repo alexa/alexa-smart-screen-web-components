@@ -7,12 +7,12 @@
 <p align="center">
 <i>Alexa Smart Screen Web Components is a node.js library for smart screen device makers building web applications that interact with the <a href="https://github.com/alexa/avs-device-sdk">AVS Device SDK</a>.</i>
 <p align="center">
-    <a href="https://github.com/alexa/alexa-smart-screen-web-components/tree/v1.0.0" alt="version">
-        <img src="https://img.shields.io/badge/stable%20version-1.0.0-brightgreen" /></a>
+    <a href="https://github.com/alexa/alexa-smart-screen-web-components/tree/v1.1.0" alt="version">
+        <img src="https://img.shields.io/badge/stable%20version-1.1.0-brightgreen" /></a>
     <a href="https://github.com/alexa/avs-device-sdk/tree/v3.0.0" alt="DeviceSDK">
         <img src="https://img.shields.io/badge/avs%20device%20sdk-3.0.0-blueviolet" /></a>
-    <a href="https://github.com/alexa/apl-client-library/tree/v2022.1.1" alt="APLClientLibrary">
-        <img src="https://img.shields.io/badge/apl%20client%20library-2022.1.1-blue" /></a>
+    <a href="https://github.com/alexa/apl-client-library/tree/v2023.1.0" alt="APLClientLibrary">
+        <img src="https://img.shields.io/badge/apl%20client%20library-2023.1.0-blue" /></a>
     <a href="https://github.com/alexa/alexa-smart-screen-web-components/issues" alt="issues">
         <img src="https://img.shields.io/github/issues/alexa/alexa-smart-screen-web-components" /></a>
 </p>

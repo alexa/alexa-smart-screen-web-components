@@ -51,7 +51,7 @@ export class APLWindowElement extends DisplayWindowElement {
     super(props.windowId);
     this.props = props;
     this.attachShadow({ mode : 'open' });
-    this.client = new APLWindowWebsocketClient(props.aplEvent, props.windowId);
+    this.client = new APLWindowWebsocketClient(props);
 
     // Init native renderer component
     this.client.initializeRenderer({

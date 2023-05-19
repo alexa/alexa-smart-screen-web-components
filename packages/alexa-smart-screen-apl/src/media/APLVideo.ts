@@ -25,13 +25,9 @@ import {
     PlaybackFocusResolverManager
 } from '@alexa-smart-screen/common';
 import {
-    APLRenderer,
     AudioTrack,
-    Component,
-    FactoryFunction,
-    IVideoFactory,
-    PlaybackState,
-    Video
+    MediaPlayerHandle,
+    PlaybackState
 } from 'apl-client';
 
 /// Default volume value for the player.
@@ -41,74 +37,38 @@ export const DEFAULT_VOLUME = 1;
 export const LOW_VOLUME = 0.2;
 
 /**
- * Factory class which creates APLVideo objects
- */
-export class APLVideoFactory implements IVideoFactory {
-    private focusManager : IFocusManager;
-    private guiActivityTracker : IGUIActivityTracker;
-    private logger : ILogger;
-
-    private readonly avsInterface : AVSInterface;
-    private readonly contentType : ContentType;
-
-    constructor(avsInterface : AVSInterface, 
-                contentType : ContentType, 
-                focusManager : IFocusManager, 
-                guiActivityTracker : IGUIActivityTracker, 
-                logger : ILogger) {
-        this.focusManager = focusManager;
-        this.guiActivityTracker = guiActivityTracker;
-        this.logger = logger;
-        this.avsInterface = avsInterface;
-        this.contentType = contentType;
-    }
-
-    public create(renderer : APLRenderer,
-                  component : APL.Component,
-                  factory : FactoryFunction,
-                  parent ?: Component) : APLVideo {
-        return new APLVideo(this.avsInterface, 
-                            this.contentType, 
-                            this.logger, 
-                            this.focusManager, 
-                            this.guiActivityTracker, 
-                            renderer, 
-                            component, 
-                            factory, 
-                            parent);
-    }
-}
-
-/**
  * A Video component which adds AVS focus support
  */
-export class APLVideo extends Video {
+export class APLVideo extends MediaPlayerHandle {
     protected static readonly CLASS_NAME = 'APLVideo';
+    protected static videoIdIterator : number = 0;
+    private id : number;
     private focusManager : IFocusManager;
     private focusToken : number;
     private playbackFocusResolverManager : PlaybackFocusResolverManager;
     private guiActivityTracker : IGUIActivityTracker;
     private activityToken : number;
     private loggerAPLVideo : ILogger;
+    private waitForFinish : boolean;
     private readonly avsInterface : AVSInterface;
     private readonly contentType : ContentType;
 
-    constructor(avsInterface : AVSInterface, 
+    constructor(mediaPlayer : APL.MediaPlayer,
+                avsInterface : AVSInterface, 
                 contentType : ContentType,
                 logger : ILogger,
                 focusManager : IFocusManager,
-                guiActivityTracker : IGUIActivityTracker,
-                renderer : APLRenderer,
-                component : APL.Component,
-                factory : FactoryFunction,
-                parent ?: Component) {
-        super(renderer, component, factory, parent);
+                guiActivityTracker : IGUIActivityTracker) {
+        super(mediaPlayer);
         this.playbackFocusResolverManager = new PlaybackFocusResolverManager(logger);
         this.loggerAPLVideo = logger;
         this.focusManager = focusManager;
         this.guiActivityTracker = guiActivityTracker;
         this.avsInterface = avsInterface;
         this.contentType = contentType;
+        this.waitForFinish = false;
+        this.id = APLVideo.videoIdIterator;
+        APLVideo.videoIdIterator++;
     }
 
     protected static getLoggerParamsBuilder() : LoggerParamsBuilder {
@@ -135,7 +95,7 @@ export class APLVideo extends Video {
                 break;
 
             case PlaybackState.PLAYING:
-                this.activityToken = this.guiActivityTracker.recordActive(`APLVideo-${this.id}`);
+                this.activityToken = this.guiActivityTracker.recordActive(`${APLVideo.CLASS_NAME}-${this.id}`);
                 break;
             case PlaybackState.BUFFERING: // FALLTHROUGH
             case PlaybackState.LOADED: // FALLTHROUGH
@@ -147,8 +107,9 @@ export class APLVideo extends Video {
     /**
      * Method to start video playback
      */
-    public async play(waitForFinish  = false) : Promise<void> {
+    public async play(waitForFinish = false) : Promise<void> {
         const functionName = 'play';
+        this.waitForFinish = waitForFinish;
         try {
             if (this.audioTrack === AudioTrack.kAudioTrackNone) {
                 // Focus is not required if there is no audio track
@@ -213,7 +174,7 @@ export class APLVideo extends Video {
                 this.player.setVolume(DEFAULT_VOLUME);
                 if (!this.playbackFocusResolverManager.getPlaybackFocusResolver()) {
                     // If focus was changed without a playback focus request, ensure we resume playback
-                    await super.play();
+                    await super.play(this.waitForFinish);
                 } else {
                     this.playbackFocusResolverManager.onResponse();
                 }
@@ -223,7 +184,7 @@ export class APLVideo extends Video {
                 this.player.setVolume(LOW_VOLUME);
                 if (!this.playbackFocusResolverManager.getPlaybackFocusResolver()) {
                     // If focus was changed without a playback focus request, ensure we resume playback
-                    await super.play();
+                    await super.play(this.waitForFinish);
                 } else {
                     this.playbackFocusResolverManager.onResponse();
                 }

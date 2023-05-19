@@ -231,6 +231,7 @@ IVisualCharacteristicsObserver, IWindowManagerObserver {
     // Register observers
     this.windowManager.getObserverManager().addObserver(this);
     this.localeManager.getObserverManager().addObserver(this.captionsRenderer);
+    this.localeManager.getObserverManager().addObserver(this.attentionSystemRenderer);
     this.doNotDisturbManager.getObserverManager().addObserver(this.attentionSystemRenderer);
     this.systemHandler.getAlexaStateObserverManager().addObserver(this);
     this.systemHandler.getAlexaStateObserverManager().addObserver(this.attentionSystemRenderer);

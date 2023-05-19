@@ -1,7 +1,7 @@
 # Alexa Smart Screen APL Module
 <p>
-    <a href="https://github.com/alexa/apl-client-library/tree/v2022.1.1" alt="APLClientLibrary">
-        <img src="https://img.shields.io/badge/apl%20client%20library-2022.1.1-blue" /></a>
+    <a href="https://github.com/alexa/apl-client-library/tree/v2023.1.0" alt="APLClientLibrary">
+        <img src="https://img.shields.io/badge/apl%20client%20library-2023.1.0-blue" /></a>
 </p>
 
 The Alexa Smart Screen APL module provides Inter-Process Communication (IPC) components, media elements, and wrappers for integrating the [APL Client Library][apl-client-library] Renderer into your project for presentation of [APL-based][apl-dev-site] Alexa visual content.

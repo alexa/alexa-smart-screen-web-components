@@ -29,8 +29,8 @@ import {
   RequestResponsePromiseWrapperWithoutTimeout,
   Timer
 } from "@alexa-smart-screen/common";
-import { AudioTrack, Video, PlaybackState } from "apl-client";
-import { APLVideo, APLVideoFactory, DEFAULT_VOLUME, LOW_VOLUME } from "../../src/media/APLVideo";
+import { AudioTrack, MediaPlayerHandle, PlaybackState } from "apl-client";
+import { APLVideo, DEFAULT_VOLUME, LOW_VOLUME } from "../../src/media/APLVideo";
 
 global.AudioContext = AudioContextMocker.AudioContext as any;
 
@@ -39,7 +39,6 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
   let focusManager : IFocusManager;
   let guiActivityTracker : IGUIActivityTracker;
   let aplVideo : APLVideo;
-  let aplVideoFactory : APLVideoFactory;
   let volume : number;
 
   const sandbox : sinon.SinonSandbox = sinon.createSandbox();
@@ -53,13 +52,10 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
   let focusManagerAcquireFocusStub : sinon.SinonStub;
   let guiActivityTrackerRecordActiveStub : sinon.SinonStub;
   let guiActivityTrackerRecordInactiveStub : sinon.SinonStub;
-  let aplVideoConstructorStub : sinon.SinonStub;
+  let mediaPlayerHandleConstructorStub : sinon.SinonStub;
   let videoPlayStub : sinon.SinonStub;
   let videoPauseStub : sinon.SinonStub;
   let videoOnEventStub : sinon.SinonStub;
-
-  const MEDIA1_ID = 1;
-  const MEDIA2_ID = 2;
 
   beforeEach(() => {
     loggerFactory = createMock<ILoggerFactory>();
@@ -68,14 +64,6 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
 
     focusManager.acquireFocus = sandbox.stub();
     focusManagerAcquireFocusStub = focusManager.acquireFocus as sinon.SinonStub;
-
-    aplVideoFactory = new APLVideoFactory(
-      AVSVisualInterfaces.ALEXA_PRESENTATION_APL, 
-      ContentType.MIXABLE,
-      focusManager,
-      guiActivityTracker,
-      loggerFactory.getLogger(APLVideoFactory.name)
-    );
 
     requestResponsePromiseWrapperWithoutTimeoutOnRejectSpy = sandbox.spy(
       RequestResponsePromiseWrapperWithoutTimeout.prototype,
@@ -96,18 +84,24 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
     guiActivityTracker.recordInactive = sandbox.stub();
     guiActivityTrackerRecordInactiveStub = guiActivityTracker.recordInactive as sinon.SinonStub;
 
-    videoPlayStub = sandbox.stub(Video.prototype, "play");
-    videoPauseStub = sandbox.stub(Video.prototype, "pause");
-    videoOnEventStub = sandbox.stub(Video.prototype, "onEvent");
+    videoPlayStub = sandbox.stub(MediaPlayerHandle.prototype, "play");
+    videoPauseStub = sandbox.stub(MediaPlayerHandle.prototype, "pause");
+    videoOnEventStub = sandbox.stub(MediaPlayerHandle.prototype, "onEvent");
 
     sandbox.stub(HTMLMediaElement.prototype, 'volume').set((v : any) => {
       volume = v;
     })
 
-    aplVideoConstructorStub = sandbox.stub();
-    // stub video class super call in the constructor: https://stackoverflow.com/questions/40271140/es2016-class-sinon-stub-constructor
-    Object.setPrototypeOf(Video, aplVideoConstructorStub);
-    aplVideo = aplVideoFactory.create(null as any, null as any, null as any);
+    mediaPlayerHandleConstructorStub = sandbox.stub();
+    // stub media player handle class super call in the constructor: https://stackoverflow.com/questions/40271140/es2016-class-sinon-stub-constructor
+    Object.setPrototypeOf(MediaPlayerHandle, mediaPlayerHandleConstructorStub);
+    aplVideo = new APLVideo(
+      null as any,
+      AVSVisualInterfaces.ALEXA_PRESENTATION_APL, 
+      ContentType.MIXABLE,
+      loggerFactory.getLogger(APLVideo.name),
+      focusManager,
+      guiActivityTracker)
   });
 
   afterEach(() => {
@@ -349,7 +343,6 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
       return focusToken0;
     });
 
-    aplVideo["setTrack"](MEDIA1_ID);
     aplVideo["setAudioTrack"](AudioTrack.kAudioTrackForeground);
     aplVideo.play();
 
@@ -362,7 +355,6 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
     });
 
     // Call play when focus request for first media is not resolved
-    aplVideo["setTrack"](MEDIA2_ID);
     aplVideo["setAudioTrack"](AudioTrack.kAudioTrackForeground);
     await aplVideo.play();
 
@@ -377,7 +369,6 @@ describe("@alexa-smart-screen/apl - APL Video functionality", () => {
       return focusToken0;
     });
 
-    aplVideo["setTrack"](MEDIA1_ID);
     aplVideo["setAudioTrack"](AudioTrack.kAudioTrackForeground);
     await aplVideo.play();
 

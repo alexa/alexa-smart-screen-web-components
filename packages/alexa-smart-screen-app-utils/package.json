@@ -22,6 +22,6 @@
     "node": ">=14.16.1"
   },
   "devDependencies": {
-    "@alexa-smart-screen/common": "^1.0.0"
+    "@alexa-smart-screen/common": "^1.1.0"
   }
 }

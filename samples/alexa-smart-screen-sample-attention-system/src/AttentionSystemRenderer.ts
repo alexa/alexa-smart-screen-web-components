@@ -30,6 +30,8 @@ import {
   PositionCssProperty,
   VisibilityCssProperty,
   IAlexaInputs,
+  ILocales,
+  LocaleLayoutDirection,
 } from '@alexa-smart-screen/common';
 import {
   AttentionSystemState
@@ -78,6 +80,10 @@ export class AttentionSystemRenderer extends HTMLElement implements IAttentionSy
       this.attentionSystemStateViewDiv.style.justifyContent = visualCharacteristics.deviceDisplay.shape === ViewportShape.RECTANGLE ?
         JustifyContentCssProperty.FLEX_END : JustifyContentCssProperty.CENTER;
     }
+  }
+
+  public onLocaleChanged(locales : ILocales, localeLayoutDirection : LocaleLayoutDirection) {
+    // No-op
   }
 
   public onDoNotDisturbStateChanged(enabled : boolean) : void {
